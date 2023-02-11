@@ -8,11 +8,13 @@ import { InfoArea } from './Components/InfoArea/InfoArea';
 import { Datecategories } from './Date/DateCategprie';
 
 import { TableArea } from './Components/TableArea/TableArea';
+import { InputArea } from './Components/InputArea/index';
+
 
 
  const App = ( ) => {
 
-    const [list ] =useState(items);
+    const [list , setList] =useState(items);
 
     const [ filteredList, setFilteredList] = useState<Item[]>([
 
@@ -60,23 +62,40 @@ import { TableArea } from './Components/TableArea/TableArea';
 
     }
 
+    const handleAddItem = ( items:Item) => {
+
+      const newList = [... list]
+      newList.push( items);
+      setList( newList)
+    }
+
   return( 
   
     <Components.Container>
       <Components.header>
                 <Components.headerText> Sistema finceiro</Components.headerText >
       </Components.header>
+            
+            
           <Components.body>
          
+         
+           <InputArea onAdd={handleAddItem}/>
+            
+
            <InfoArea currentMonth={currentMonth}
            onMonthChang={ handleMonthChange}
            income={income}
            expense={ expense}
            />
           
+
            <TableArea list={filteredList}
            
-           />         
+           />     
+            
+            
+            
           </Components.body>
     </Components.Container>
   );
